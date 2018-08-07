@@ -164,7 +164,7 @@ System.register(['lodash', './libs/leaflet'], function (_export, _context) {
                   location: dataPoint.key
                 });
                 circle.unbindPopup();
-                _this4.createPopup(circle, dataPoint.locationName, dataPoint.valueRounded);
+                _this4.createPopup(circle, dataPoint.locationName, dataPoint.valueRounded, dataPoint.locationLatitude, dataPoint.locationLongitude);
               }
             });
           }
@@ -179,7 +179,7 @@ System.register(['lodash', './libs/leaflet'], function (_export, _context) {
               location: dataPoint.key
             });
 
-            this.createPopup(circle, dataPoint.locationName, dataPoint.valueRounded);
+            this.createPopup(circle, dataPoint.locationName, dataPoint.valueRounded, dataPoint.locationLatitude, dataPoint.locationLongitude);
             return circle;
           }
         }, {
@@ -199,9 +199,10 @@ System.register(['lodash', './libs/leaflet'], function (_export, _context) {
           }
         }, {
           key: 'createPopup',
-          value: function createPopup(circle, locationName, value) {
+          value: function createPopup(circle, locationName, value, latitude, longitude) {
             var unit = value && value === 1 ? this.ctrl.panel.unitSingular : this.ctrl.panel.unitPlural;
-            var label = (locationName + ': ' + value + ' ' + (unit || '')).trim();
+			var linkUrl = this.ctrl.panel.circleBaseUrl + '?name=' + locationName + '&value=' + value + '&latitude=' + latitude + '&longitude=' + longitude;
+			var label = ('<a href="' + linkUrl + '" target=_blank>' + locationName + ': ' + value + ' ' + (unit || '') + '</a>');
             circle.bindPopup(label, { 'offset': window.L.point(0, -2), 'className': 'worldmap-popup', 'closeButton': this.ctrl.panel.stickyLabels });
 
             circle.on('mouseover', function onMouseOver(evt) {

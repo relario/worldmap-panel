@@ -84,6 +84,7 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'app/core/utils/kbn
         unitPlural: '',
         showLegend: true,
         mouseWheelZoom: false,
+		circleBaseUrl: '',
         esMetric: 'Count',
         decimals: 0,
         hideEmpty: false,
