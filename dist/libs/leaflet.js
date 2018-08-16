@@ -5585,7 +5585,7 @@ System.register([], function (_export, _context) {
 				// @option attributionControl: Boolean = true
 				// Whether a [attribution control](#control-attribution) is added to the map by default.
 				Map.mergeOptions({
-					attributionControl: true
+					attributionControl: false
 				});
 
 				Map.addInitHook(function () {
