@@ -201,9 +201,9 @@ System.register(['lodash', './libs/leaflet'], function (_export, _context) {
           key: 'createPopup',
           value: function createPopup(circle, locationName, value, latitude, longitude) {
             var unit = value && value === 1 ? this.ctrl.panel.unitSingular : this.ctrl.panel.unitPlural;
-			var linkUrl = this.ctrl.panel.circleBaseUrl + '?name=' + locationName + '&value=' + value + '&latitude=' + latitude + '&longitude=' + longitude;
-			var label = ('<a href="' + linkUrl + '" target=_blank>' + locationName + ': ' + value + ' ' + (unit || '') + '</a>');
-            circle.bindPopup(label, { 'offset': window.L.point(0, -2), 'className': 'worldmap-popup', 'closeButton': this.ctrl.panel.stickyLabels });
+            var linkUrl = this.ctrl.panel.circleBaseUrl + '?name=' + locationName + '&value=' + value + '&latitude=' + latitude + '&longitude=' + longitude;
+			  var label = (locationName + ': ' + value + ' ' + (unit || ''));
+			  circle.bindPopup(label, { 'offset': window.L.point(0, 2), 'className': 'worldmap-popup', 'closeButton': this.ctrl.panel.stickyLabels });
 
             circle.on('mouseover', function onMouseOver(evt) {
               var layer = evt.target;
@@ -212,10 +212,18 @@ System.register(['lodash', './libs/leaflet'], function (_export, _context) {
             });
 
             if (!this.ctrl.panel.stickyLabels) {
+              circle.on('click', function onClick() {
+                circle.closePopup();
+                  window.open(linkUrl,'_blank');
+              });
+            }
+
+            if (!this.ctrl.panel.stickyLabels) {
               circle.on('mouseout', function onMouseOut() {
                 circle.closePopup();
               });
             }
+
           }
         }, {
           key: 'getColor',
