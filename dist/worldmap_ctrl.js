@@ -90,6 +90,7 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'app/core/utils/kbn
         hideEmpty: false,
         hideZero: false,
         stickyLabels: false,
+		forceTimeShiftZero: false,
         tableQueryOptions: {
           queryType: 'geohash',
           geohashField: 'geohash',
@@ -298,6 +299,12 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'app/core/utils/kbn
         }, {
           key: 'toggleStickyLabels',
           value: function toggleStickyLabels() {
+            this.map.clearCircles();
+            this.render();
+          }
+        }, {
+          key: 'forceTimeShiftZero',
+          value: function forceTimeShiftZero() {
             this.map.clearCircles();
             this.render();
           }
