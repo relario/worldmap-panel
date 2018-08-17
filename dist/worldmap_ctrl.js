@@ -301,6 +301,28 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'app/core/utils/kbn
             this.map.clearCircles();
             this.render();
           }
+	   }, {
+					key: 'updateThresholds',
+					value: function updateThresholds() {
+						var thresholdCount = this.panel.thresholds.length;
+						var colorCount = this.panel.colors.length;
+						this.changeThresholds();
+					}
+				}, {
+					key: 'changeColor',
+					value: function changeColor(colorIndex, color) {
+						this.panel.colors[colorIndex] = color;
+					}
+				}, {
+					key: 'removeColor',
+					value: function removeColor(colorIndex) {
+						this.panel.colors.splice(colorIndex, 1);
+					}
+				}, {
+					key: 'addColor',
+					value: function addColor() {
+						this.panel.colors.push('rgba(255, 255, 255, 1)');
+			}
         }, {
           key: 'changeThresholds',
           value: function changeThresholds() {
