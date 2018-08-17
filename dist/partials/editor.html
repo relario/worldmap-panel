@@ -186,11 +186,42 @@
       <input type="text" class="input-small gf-form-input width-10" ng-model="ctrl.panel.esMetric" ng-change="ctrl.refresh()" ng-model-onblur
       />
     </div>
+	  
+  <div class="section gf-form-group">
+    <h5 class="section-heading">Hide series</h5>
+    <gf-form-switch class="gf-form" label="With only nulls" label-class="width-10" checked="ctrl.panel.hideEmpty" on-change="ctrl.render()">
+    </gf-form-switch>
+    <gf-form-switch class="gf-form" label="With only zeros" label-class="width-10" checked="ctrl.panel.hideZero" on-change="ctrl.render()">
+    </gf-form-switch>
+  </div>
   </div>
 
   <div class="section gf-form-group">
     <h5 class="section-heading">Threshold Options</h5>
-    <div class="gf-form">
+	 <div class="gf-form">
+                <label class="gf-form-label width-10">Threshold %
+                        <tip>Define threshold values as a percentage range to change the dot colors</tip>
+                </label>
+		<input
+			type="text" class="input-small gf-form-input width-10"
+			ng-model="ctrl.panel.thresholds" ng-change="ctrl.updateThresholds()"
+			placeholder="0,10" ng-model-onblur />
+	</div>
+	<div class="gf-form">
+		<label class="gf-form-label width-10">Colors</label>
+		<div class="gf-form-inline" ng-repeat="color in ctrl.panel.colors track by $index">
+			<label class="gf-form-label">
+				<a ng-click="ctrl.removeColor($index)"><i class="pointer fa fa-remove">&nbsp;</i></a>
+				<spectrum-picker ng-model="color" ng-change="ctrl.changeColor($index, color)" ng-model-onblur></spectrum-picker>
+			</label>
+		</div>
+		<span class="gf-form-label">
+	        <a  ng-click="ctrl.addColor()">
+	          <i class="fa fa-plus"></i>&nbsp;
+	        </a>
+    	</span>
+    </div>
+    <!--<div class="gf-form">
       <label class="gf-form-label width-10">Thresholds</label>
       <input type="text" class="input-small gf-form-input width-10" ng-model="ctrl.panel.thresholds" ng-change="ctrl.changeThresholds()"
         placeholder="0,10" ng-model-onblur />
@@ -199,14 +230,7 @@
       <label class="gf-form-label width-10">Colors</label>
       <spectrum-picker class="gf-form-input width-3" ng-repeat="color in ctrl.panel.colors track by $index" ng-model="ctrl.panel.colors[$index]"
         ng-change="ctrl.changeThresholds()"></spectrum-picker>
-    </div>
+    </div>-->
   </div>
 
-  <div class="section gf-form-group">
-    <h5 class="section-heading">Hide series</h5>
-    <gf-form-switch class="gf-form" label="With only nulls" label-class="width-10" checked="ctrl.panel.hideEmpty" on-change="ctrl.render()">
-    </gf-form-switch>
-    <gf-form-switch class="gf-form" label="With only zeros" label-class="width-10" checked="ctrl.panel.hideZero" on-change="ctrl.render()">
-    </gf-form-switch>
-  </div>
 </div>
